@@ -46,6 +46,8 @@ class _UpdateUserState extends State<UpdateUser> {
     super.dispose();
   }
 
+  // Example of GraphQL mutation
+  // mutation is used to modify server-side data
   String updateUser() {
     return """
       mutation updateUser(\$id: uuid!, \$name: String!, \$rocket: String!, \$twitter: String!){
@@ -61,6 +63,8 @@ class _UpdateUserState extends State<UpdateUser> {
     """;
   }
 
+  // Example of GraphQL mutation
+  // mutation is used to modify server-side data
   String deleteUser() {
     return """
       mutation deleteUser(\$id : uuid!) {

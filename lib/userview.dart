@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_graphql_api_integration/updateuser.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class UserView extends StatelessWidget {
+  // Example of GraphQL query
+  // query is used to fetch data from API
   final String _query = """
   query users{
     users{
@@ -22,7 +25,7 @@ class UserView extends StatelessWidget {
       builder: (result, {fetchMore, refetch}) {
         if (result.loading) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: CupertinoActivityIndicator(),
           );
         } else {
           List users = result.data["users"];

@@ -7,6 +7,8 @@ class AddUser extends StatefulWidget {
 }
 
 class _AddUserState extends State<AddUser> {
+  // Example of GraphQL mutation
+  // mutation is used to modify server-side data
   String insertUser() {
     return """
     mutation insertUser(\$name: String!, \$rocket: String!, \$twitter: String!) {

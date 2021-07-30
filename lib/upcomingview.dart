@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class UpcomingView extends StatelessWidget {
+  // Example of GraphQL query
+  // query is used to fetch data from API
   final String _query = """
     query launchUpcoming {
   launchesUpcoming(limit: 10) {
@@ -25,7 +28,7 @@ class UpcomingView extends StatelessWidget {
       builder: (result, {fetchMore, refetch}) {
         if (result.loading) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: CupertinoActivityIndicator(),
           );
         } else {
           List launches = result.data["launchesUpcoming"];

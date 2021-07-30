@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class HistoryView extends StatelessWidget {
+  // Example of GraphQL query
+  // query is used to fetch data from API
   final String _query = """
     query launchHistory {
   launchesPast(limit: 10) {
@@ -25,7 +28,7 @@ class HistoryView extends StatelessWidget {
       builder: (result, {fetchMore, refetch}) {
         if (result.loading) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: CupertinoActivityIndicator(),
           );
         } else {
           List history = result.data["launchesPast"];
