@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -118,15 +119,15 @@ class HistoryView extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.indigo,
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: NetworkImage(history
-                                  .elementAt(index)["links"]["flickr_images"]
-                                  .isEmpty
-                              ? "https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"
-                              : history.elementAt(index)["links"]
-                                  ["flickr_images"][1]),
-                        ),
+                      ),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageUrl: history
+                                .elementAt(index)["links"]["flickr_images"]
+                                .isEmpty
+                            ? "https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"
+                            : history.elementAt(index)["links"]["flickr_images"]
+                                [1],
                       ),
                     ),
                   ),
