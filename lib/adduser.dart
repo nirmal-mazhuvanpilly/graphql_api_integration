@@ -28,23 +28,23 @@ class _AddUserState extends State<AddUser> {
     """;
   }
 
-  TextEditingController name_controller;
-  TextEditingController rocket_controller;
-  TextEditingController twitter_controller;
+  TextEditingController nameController;
+  TextEditingController rocketController;
+  TextEditingController twitterController;
 
   @override
   void initState() {
     super.initState();
-    name_controller = TextEditingController();
-    rocket_controller = TextEditingController();
-    twitter_controller = TextEditingController();
+    nameController = TextEditingController();
+    rocketController = TextEditingController();
+    twitterController = TextEditingController();
   }
 
   @override
   void dispose() {
-    name_controller.dispose();
-    rocket_controller.dispose();
-    twitter_controller.dispose();
+    nameController.dispose();
+    rocketController.dispose();
+    twitterController.dispose();
     super.dispose();
   }
 
@@ -59,7 +59,7 @@ class _AddUserState extends State<AddUser> {
       ),
       body: Mutation(
         options: MutationOptions(
-          documentNode: gql(
+          document: gql(
             insertUser(),
           ),
           fetchPolicy: FetchPolicy.noCache,
@@ -83,7 +83,7 @@ class _AddUserState extends State<AddUser> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
-                      controller: name_controller,
+                      controller: nameController,
                       decoration: InputDecoration(
                         hintText: "Name",
                         contentPadding: const EdgeInsets.all(10),
@@ -99,7 +99,7 @@ class _AddUserState extends State<AddUser> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
-                      controller: rocket_controller,
+                      controller: rocketController,
                       decoration: InputDecoration(
                         hintText: "Rocket",
                         contentPadding: const EdgeInsets.all(10),
@@ -115,7 +115,7 @@ class _AddUserState extends State<AddUser> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
-                      controller: twitter_controller,
+                      controller: twitterController,
                       decoration: InputDecoration(
                         hintText: "Twitter",
                         contentPadding: const EdgeInsets.all(10),
@@ -126,17 +126,17 @@ class _AddUserState extends State<AddUser> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (name_controller.text.isNotEmpty &&
-                          rocket_controller.text.isNotEmpty &&
-                          twitter_controller.text.isNotEmpty) {
+                      if (nameController.text.isNotEmpty &&
+                          rocketController.text.isNotEmpty &&
+                          twitterController.text.isNotEmpty) {
                         // print(name_controller.text);
                         // print(rocket_controller.text);
                         // print(twitter_controller.text);
 
                         runMutation({
-                          'name': name_controller.text,
-                          'rocket': rocket_controller.text,
-                          'twitter': twitter_controller.text,
+                          'name': nameController.text,
+                          'rocket': rocketController.text,
+                          'twitter': twitterController.text,
                         });
                       } else {
                         final snackBar = SnackBar(
@@ -146,8 +146,7 @@ class _AddUserState extends State<AddUser> {
                             textAlign: TextAlign.center,
                           ),
                         );
-
-                        _scaffoldKey.currentState.showSnackBar(snackBar);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     },
                     child: Text("Add User"),

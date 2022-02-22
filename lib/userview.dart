@@ -20,10 +20,10 @@ class UserView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Query(
       options: QueryOptions(
-        documentNode: gql(_query),
+        document: gql(_query),
       ),
       builder: (result, {fetchMore, refetch}) {
-        if (result.loading) {
+        if (result.isLoading) {
           return Center(
             child: CupertinoActivityIndicator(),
           );

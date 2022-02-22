@@ -7,9 +7,9 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Configuring GraphQL Client
-  final HttpLink link = HttpLink(uri: 'https://api.spacex.land/graphql/');
+  final HttpLink link = HttpLink('https://api.spacex.land/graphql/');
   GraphQLClient graphQLClient =
-      GraphQLClient(link: link, cache: InMemoryCache());
+      GraphQLClient(link: link,cache: GraphQLCache(store: InMemoryStore()));
   ValueNotifier<GraphQLClient> client = ValueNotifier(graphQLClient);
 
   runApp(MyApp(

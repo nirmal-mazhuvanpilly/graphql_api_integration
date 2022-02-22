@@ -25,9 +25,9 @@ class HistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Query(
-      options: QueryOptions(documentNode: gql(_query)),
+      options: QueryOptions(document: gql(_query)),
       builder: (result, {fetchMore, refetch}) {
-        if (result.loading) {
+        if (result.isLoading) {
           return Center(
             child: CupertinoActivityIndicator(),
           );

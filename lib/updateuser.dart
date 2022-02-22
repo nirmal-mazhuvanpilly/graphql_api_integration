@@ -25,24 +25,24 @@ class _UpdateUserState extends State<UpdateUser> {
     print(widget.twitter);
   }
 
-  TextEditingController name_controller = TextEditingController();
-  TextEditingController rocket_controller = TextEditingController();
-  TextEditingController twitter_controller = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController rocketController = TextEditingController();
+  TextEditingController twitterController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     showLoadedValues();
-    name_controller.text = widget.name ?? "";
-    rocket_controller.text = widget.rocket ?? "";
-    twitter_controller.text = widget.twitter ?? "";
+    nameController.text = widget.name ?? "";
+    rocketController.text = widget.rocket ?? "";
+    twitterController.text = widget.twitter ?? "";
   }
 
   @override
   void dispose() {
-    name_controller.dispose();
-    rocket_controller.dispose();
-    twitter_controller.dispose();
+    nameController.dispose();
+    rocketController.dispose();
+    twitterController.dispose();
     super.dispose();
   }
 
@@ -99,7 +99,7 @@ class _UpdateUserState extends State<UpdateUser> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextFormField(
-                  controller: name_controller,
+                  controller: nameController,
                   decoration: InputDecoration(
                     hintText: "Name",
                     contentPadding: const EdgeInsets.all(10),
@@ -115,7 +115,7 @@ class _UpdateUserState extends State<UpdateUser> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  controller: rocket_controller,
+                  controller: rocketController,
                   decoration: InputDecoration(
                     hintText: "Rocket",
                     contentPadding: const EdgeInsets.all(10),
@@ -131,7 +131,7 @@ class _UpdateUserState extends State<UpdateUser> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  controller: twitter_controller,
+                  controller: twitterController,
                   decoration: InputDecoration(
                     hintText: "Twitter",
                     contentPadding: const EdgeInsets.all(10),
@@ -146,7 +146,7 @@ class _UpdateUserState extends State<UpdateUser> {
                 children: <Widget>[
                   Mutation(
                     options: MutationOptions(
-                      documentNode: gql(
+                      document: gql(
                         deleteUser(),
                       ),
                       fetchPolicy: FetchPolicy.noCache,
@@ -171,7 +171,7 @@ class _UpdateUserState extends State<UpdateUser> {
                   SizedBox(width: 10),
                   Mutation(
                     options: MutationOptions(
-                      documentNode: gql(
+                      document: gql(
                         updateUser(),
                       ),
                       fetchPolicy: FetchPolicy.noCache,
@@ -183,18 +183,18 @@ class _UpdateUserState extends State<UpdateUser> {
                     builder: (runMutation, result) {
                       return ElevatedButton(
                         onPressed: () {
-                          if (name_controller.text.isNotEmpty &&
-                              rocket_controller.text.isNotEmpty &&
-                              twitter_controller.text.isNotEmpty) {
+                          if (nameController.text.isNotEmpty &&
+                              rocketController.text.isNotEmpty &&
+                              twitterController.text.isNotEmpty) {
                             // print(name_controller.text);
                             // print(rocket_controller.text);
                             // print(twitter_controller.text);
                             runMutation(
                               {
                                 'id': widget.id,
-                                'name': name_controller.text,
-                                'rocket': rocket_controller.text,
-                                'twitter': twitter_controller.text,
+                                'name': nameController.text,
+                                'rocket': rocketController.text,
+                                'twitter': twitterController.text,
                               },
                             );
                           } else {
@@ -206,7 +206,7 @@ class _UpdateUserState extends State<UpdateUser> {
                               ),
                             );
 
-                            _scaffoldKey.currentState.showSnackBar(snackBar);
+                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                         },
                         child: Text("Update User"),
