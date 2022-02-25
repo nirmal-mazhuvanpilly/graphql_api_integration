@@ -36,4 +36,30 @@ class Services {
       return null;
     }
   }
+
+  Future<void> addUser({String name, String rocket, String twitter}) async {
+    try {
+      await _queries.addUser(name: name, rocket: rocket, twitter: twitter);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<void> deleteUser(String id) async {
+    try {
+      await _queries.deleteUser(id);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<void> updateUser(
+      {String id, String name, String rocket, String twitter}) async {
+    try {
+      await _queries.updateUser(
+          id: id, name: name, rocket: rocket, twitter: twitter);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

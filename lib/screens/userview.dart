@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_graphql_api_integration/providers/spacex_provider.dart';
+import 'package:flutter_graphql_api_integration/screens/updateuser.dart';
 import 'package:provider/provider.dart';
 
 class UserView extends StatefulWidget {
@@ -46,13 +47,47 @@ class _UserViewState extends State<UserView> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    value.usersModel.data.users.elementAt(index).name ??
-                        "-----",
-                    style: TextStyle(
-                      color: Colors.indigo,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        value.usersModel.data.users.elementAt(index).name ??
+                            "-----",
+                        style: TextStyle(
+                          color: Colors.indigo,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.edit,
+                          size: 20,
+                          color: Colors.indigo,
+                        ),
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => UpdateUser(
+                              id: value.usersModel.data.users
+                                      .elementAt(index)
+                                      .id ??
+                                  "",
+                              name: value.usersModel.data.users
+                                      .elementAt(index)
+                                      .name ??
+                                  "",
+                              rocket: value.usersModel.data.users
+                                      .elementAt(index)
+                                      .rocket ??
+                                  "",
+                              twitter: value.usersModel.data.users
+                                      .elementAt(index)
+                                      .twitter ??
+                                  "",
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Text(
                     "ID",

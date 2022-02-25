@@ -15,12 +15,14 @@ class GraphQlClientConfig {
         GraphQLClient(link: _link, cache: GraphQLCache(store: InMemoryStore()));
   }
 
-  Future<dynamic> query(String query) async {
+  Future<dynamic> query(String query, {Map<String, dynamic> variables}) async {
     try {
       final QueryResult queryResult = await _graphQLClient
           .query(
         QueryOptions(
-            document: gql(query), fetchPolicy: FetchPolicy.networkOnly),
+            variables: variables,
+            document: gql(query),
+            fetchPolicy: FetchPolicy.networkOnly),
       )
           .timeout(const Duration(seconds: 60), onTimeout: () {
         throw NetworkException(
@@ -55,12 +57,15 @@ class GraphQlClientConfig {
     }
   }
 
-  Future<dynamic> mutatation(String query) async {
+  Future<dynamic> mutatation(String query,
+      {Map<String, dynamic> variables}) async {
     try {
       final QueryResult queryResult = await _graphQLClient
           .mutate(
         MutationOptions(
-            document: gql(query), fetchPolicy: FetchPolicy.networkOnly),
+            variables: variables,
+            document: gql(query),
+            fetchPolicy: FetchPolicy.networkOnly),
       )
           .timeout(const Duration(seconds: 60), onTimeout: () {
         throw NetworkException(

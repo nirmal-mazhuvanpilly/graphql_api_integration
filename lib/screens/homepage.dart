@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graphql_api_integration/screens/adduser.dart';
 import 'package:flutter_graphql_api_integration/screens/historyview.dart';
 import 'package:flutter_graphql_api_integration/screens/upcomingview.dart';
 import 'package:flutter_graphql_api_integration/screens/userview.dart';
@@ -56,6 +57,15 @@ class _HomePageState extends State<HomePage> {
                   label: 'History',
                 ),
               ],
+            );
+          }),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => AddUser(),
+              ),
             );
           }),
     );

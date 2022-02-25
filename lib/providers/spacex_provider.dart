@@ -45,4 +45,21 @@ class SpaceXProvider with ChangeNotifier {
     historyModel = await _services.fetchHistory();
     notifyListeners();
   }
+
+  Future<void> addUser({String name, String rocket, String twitter}) async {
+    await _services.addUser(name: name, rocket: rocket, twitter: twitter);
+    notifyListeners();
+  }
+
+  Future<void> deleteUser(String id) async {
+    await _services.deleteUser(id);
+    notifyListeners();
+  }
+
+  Future<void> updateUser(
+      {String id, String name, String rocket, String twitter}) async {
+    await _services.updateUser(
+        id: id, name: name, rocket: rocket, twitter: twitter);
+    notifyListeners();
+  }
 }

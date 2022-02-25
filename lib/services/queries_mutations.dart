@@ -54,4 +54,69 @@ class QueriesMutations {
   """;
     return await GraphQlClientConfig.instance.query(_query);
   }
+
+  Future<dynamic> addUser({String name, String rocket, String twitter}) async {
+    final String _query = """
+    mutation insertUser(\$name: String!, \$rocket: String!, \$twitter: String!) {
+      insert_users(objects: {
+        name: \$name,
+        rocket: \$rocket,
+        twitter: \$twitter,
+      }) {
+        returning {
+          id
+          name
+          twitter
+          rocket
+        }
+      }
+    }
+    """;
+    Map<String, dynamic> variables = {
+      "name": name,
+      "rocket": rocket,
+      "twitter": twitter
+    };
+    return await GraphQlClientConfig.instance
+        .mutatation(_query, variables: variables);
+  }
+
+  Future<dynamic> deleteUser(String id) async {
+    final String _query = """
+      mutation deleteUser(\$id : uuid!) {
+         delete_users(where: {id: {_eq: \$id}}) {
+           returning {
+            id
+           }
+       }
+      }
+    """;
+    Map<String, dynamic> variables = {"id": id};
+    return await GraphQlClientConfig.instance
+        .mutatation(_query, variables: variables);
+  }
+
+  Future<dynamic> updateUser(
+      {String id, String name, String rocket, String twitter}) async {
+    final String _query = """
+      mutation updateUser(\$id: uuid!, \$name: String!, \$rocket: String!, \$twitter: String!){
+        update_users(_set:{name: \$name, rocket: \$rocket, twitter: \$twitter}, where: {id: {_eq: \$id}}){
+          returning {
+            id
+            name
+            rocket
+            twitter
+          }
+        }
+      }
+    """;
+    Map<String, dynamic> variables = {
+      "id": id,
+      "name": name,
+      "rocket": rocket,
+      "twitter": twitter
+    };
+    return await GraphQlClientConfig.instance
+        .mutatation(_query, variables: variables);
+  }
 }
